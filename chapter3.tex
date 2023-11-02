@@ -1,0 +1,57 @@
+\documentclass{beamer}
+\usepackage{amsbsy}
+\usepackage{amstext}
+\usepackage{amssymb}
+\usepackage{fontspec}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\input{ncmd.tex}
+\makeatletter
+\usefonttheme{professionalfonts}
+
+\AtBeginSection{
+  \begin{frame}[c]
+    \sectionpage
+  \end{frame}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+% this default might be overridden by plain title style
+\newcommand\makebeamertitle{\frame{\maketitle}}%
+% (ERT) argument for the TOC
+\AtBeginDocument{%
+  \let\origtableofcontents=\tableofcontents
+  \def\tableofcontents{\@ifnextchar[{\origtableofcontents}{\gobbletableofcontents}}
+  \def\gobbletableofcontents#1{\origtableofcontents}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usetheme{Singapore}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+% \usefonttheme[onlymath]{serif}
+% or ...
+% \setbeamercovered{transparent}
+% or whatever (possibly just delete it)
+
+\makeatother
+
+\usepackage{polyglossia}
+\setdefaultlanguage[variant=american]{english}
+\begin{document}
+\title{Chapter 3. \\ Integer Functions}
+\subtitle{Discussion on CMath: A Foundation for CS}
+\institute{China Univ. of Geosciences}
+\author{AUGPath}
+
+
+\makebeamertitle
+\global\long\def\R{\mathbb{R}}%
+
+\input{contents/ch3/cdefn.tex}
+
+\input{contents/ch3/crecur.tex}
+\input{contents/ch3/cmod.tex}
+
+\input{thanks.tex}
+
+\end{document}

@@ -1,0 +1,334 @@
+\section{Mod: The binary Op}
+
+\begin{frame}{Mod: definition}
+    We may rewrite the quotient and remainder as follows: 
+
+    If $n$ is an integer, then $$n=m\flr{n/m}+n\bmod m.$$ for $y\neq 0$. 
+
+\only<1>{
+    \begin{itemize}
+        \item generalize it to negative integers
+        \item $5 \bmod 3 = 5-3\flr{5/3} =2.$ 
+        \item $5 \bmod -3 = 5-(-3)\flr{5/-3} =-1.$ 
+        \item $-5 \bmod 3 = -5-(-3)\flr{-5/3} =1.$ 
+        \item $-5 \bmod -3 = -5-(-3)\flr{-5/-3} =-2.$ 
+    \end{itemize}
+}
+
+\only<2>{
+    \begin{itemize}
+        \item Observation: In any case the result number 
+        is exactly in between 2 numbers. 
+        \item Special definition: if $y=0$, then $x\bmod 0=x$. 
+        \item preserves the property that $x$ and $y$ 
+        always differs from $x$ by a multiple of $y$.
+    \end{itemize}
+}
+    
+\end{frame}
+
+\begin{frame}{Another notation: Mumble}
+    We have $n \bmod m = n - \flr{n/m}m$
+
+    Alternative definition: \underline{mumble}. 
+    $$
+    x \operatorname{ mumble } y = y \cil{{x\over y}} -x
+    $$
+\end{frame}
+
+\begin{frame}{Properties}
+    \begin{itemize}
+        \item Distributive: $c(x\bmod y) = (cx) \bmod (cy)$
+        for $c,x,y\in \R$. 
+        \item reason: $c(x\bmod y) = c(x-y\cil{x/y})=cx-cy(\flr{cx/cy}) = (cx) \bmod (cy)$. 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Example: Even partition problem(EPP)}
+
+Problem: Partition $n$ things into $m$ groups as equally
+as possible. 
+
+\only<1>{
+    An example: 
+    $$
+    \begin{matrix}
+      1&  9&   17&  25& 33\\
+      2&  10&  18&  26& 34\\
+      3&  11&  19&  27& 35\\
+      4&  12&  20&  28& 36\\
+      5&  13&  21&  29& 37\\
+      6&  14&  22&  30& \\
+      7&  15&  23&  31& \\
+      8&  16&  24&  32&
+    \end{matrix}
+    $$
+   \begin{itemize}
+       \item  the final row has only 5 elems, can we do better? 
+   \end{itemize}
+}
+
+\only<2>{
+    A evener example: 
+    An example: 
+    $$
+    \begin{matrix}
+      1&  9&   17&  24& 31\\
+      2&  10&  18&  25& 32\\
+      3&  11&  19&  26& 33\\
+      4&  12&  20&  27& 34\\
+      5&  13&  21&  28& 35\\
+      6&  14&  22&  29& 36\\
+      7&  15&  23&  30& 37\\
+      8&  16&  &      &
+    \end{matrix}
+    $$
+}
+
+\only<3>{
+    \begin{itemize}
+        \item Division: a row by row arrange not always good. 
+        \item it tells us how many lines to put 
+        \begin{itemize}
+            \item Some of the short one put $\cil{n/m}$ columns, others put $\flr{n/m}$ cols. 
+            \item There will be exactly $n \bmod m$ cols, and exactly $m-n\bmod m = n \operatorname{ mumble }m$short ones. 
+        \end{itemize}
+        
+    \end{itemize}
+}
+
+\only<4> {
+    Procedure: 
+    \begin{itemize}
+        \item To distribute $n$ things into 
+        $m$ groups as even as possible, 
+        \item when $m>0$, put $\cil{n/m}$ things into one group
+        \item then use this procedure to recursively 
+        \item i.e. put put the remaining $n'=n-\cil{n-m}$ things into $m'=m-1$ groups.
+    \end{itemize}
+    Proof: 
+    \begin{itemize}
+        \item Suppose that $n=qm+r$
+        \item If $r=0$, We put $\flr{n/m}=q$ things into the first, $n'= n-q, m'=m-1$. 
+        \item If $r>0$, put $\flr{n/m}=q+1$ into first group, leaving $n'=n-q-1=qm'+r-1$.
+    \end{itemize}
+}
+
+\only<5>{
+    A closed form for the formula? 
+    \begin{itemize}
+        \item Effect: the quotient stays the same, but the remainder decrease by 1. 
+        \item That is there are $\cil{n/m}$ things when $k\leq n \bmod m$, and $\flr{n/m}$ things o.w.
+        \item So the closed form is $\cil{n-k+1/m}$. 
+    \end{itemize}
+
+    Since we are arrange $n$ elems, we have the following identity: 
+
+    $$
+    n=\flr{{n\over m}}+\flr{{n+1\over m}}+\cdots+\flr{{n+(m-1)\over m}}
+    $$
+    
+    Replace $n$ by $mx$ we get 
+    
+    $$
+    mx=\flr{{x}}+\flr{{x+{1\over m}}}+\cdots+\flr{{x+{m-1\over m}}}
+    $$
+}
+\end{frame}
+
+\begin{frame}{Example: A Weird Sum(WS)}
+    Find 
+    $$
+    \sum_{0\leq k \leq n} \flr{\sqrt{k}}
+    $$where $a$ is a perfect square. 
+    
+    Solution:
+\only<1>{
+    \begin{align*}
+        &~\sum_{0\leq k\leq n} \cil{\sqrt{k}} \\  
+        &=\sum_{k, m\geq 0} m[k<n][m=\cil{k}] \\
+        &=\sum_{k, m\geq 0} m [k<n] [m\leq \sqrt{k}<m+1]     
+    \end{align*}
+
+    Then we calculate the total number of this.
+}
+
+\only<2>{
+    \begin{align*}
+        &=\sum_{k, m\geq 0} m [k<n] [m\leq \sqrt{k}<m+1]  \\
+        &=\sum_{k, m\geq 0} m[m\leq k \leq (m+1)^2 \leq a^2] \\
+        &= \sum_{m\geq 0} m((m+1)^2-m^2)[m+1\leq a] \\ 
+        &= \sum_{m\geq 0, m\leq a} m(2m+1) \\ 
+    \end{align*}
+
+    Oh, we can use falling sums! 
+}
+
+\only<3>{
+    That is 
+    $$
+    \sum_0^a (2m^{\underline2}+3m^{\underline1})\delta m
+    $$
+    Using the integration rule, we get $2/3a(a-1)(a-2)+3/2a(a-1)$. 
+}
+
+\only<4> {
+    Removing the perfect square condition
+    \begin{itemize}
+        \item do the partition from $[0..a^2]$ and $[a^2..n]$. 
+        \item this will use O notation to express its increament. 
+    \end{itemize}
+}
+    
+    
+\end{frame}
+
+\begin{frame}{Example: an Integrated Example(IE)}
+
+Find the closed form for 
+$$
+\sum_{0\leq k< m} \flr{{nk+x\over m}} 
+$$
+for integer $m>0$, integer $n$. 
+
+\only<1>{
+    We first look at some observations
+    \begin{itemize}
+        \item $n=1$, yields $\sum_{0\leq k<m}\flr{(k+x)/m}$, where we found at the EPP problem. 
+        \item $m=1$, this will be $\flr{x}$;
+        \item $m=2$, we look at $\flr{x/2}+\flr{(x+n)/2}$. 
+        \begin{itemize}
+            \item $n$ even, $n/2$ integer. $\flr{x/2}+\flr{(x+n)/2}=2\flr{x/2}+{n/2}$. 
+            \item $n$ odd, $(n-1)/2$ integer. $\flr{x/2}+(\flr{(x+1)/2}+(n-1)/2)=\flr{x}+{(n-1)/2}$.
+        \end{itemize}
+    \end{itemize}
+}
+
+\only<2>{
+    Have a look at $m=3$: 
+    \begin{itemize}
+        \item $n \bmod 3 = 0, n/3 $ and $2n/3$ integers: $\flr{{x\over3}}+\flr{{x\over3}+{n\over 3}}+\flr{{x\over3}+{2n\over 3}}=3\flr{x/3}+n$.
+        \item $n \bmod 3 = 1, n-1/3 $ and $2n-2/3$ integers: $\flr{{x\over3}}+\flr{{x+1\over3}+{n-1\over 3}}+\flr{{x+2\over3}+{2n-2\over 3}}=\flr{x}+n-1$.
+        \item $n \bmod 3 = 2, n-2/3 $ and $2n-4/3$ integers: $\flr{{x\over3}}+\flr{{x+2\over3}+{n-2\over 3}}+\flr{{x+4\over3}+{2n-4\over 3}}=\flr{x}+n-1$.
+    \end{itemize}
+}
+
+\only<3>{
+    Look at $n=4$, 
+    \begin{itemize}
+        \item $n\bmod 4 = 0, 4\flr{x/4}+3n/2$;
+        \item $n\bmod 4 = 1, \flr{x}+3n/2-3/2$;
+        \item $n\bmod 4 = 0, \flr{x}+3n/2-3/2$;
+        \item $n\bmod 4 = 0, 2\flr{x}+3n/2-1$;
+    \end{itemize}
+}
+
+\only<4>{
+    We make a small table for this: 
+    $$
+    \begin{array}{c|cccc}m &n \bmod m = 0&n \bmod m = 1&n \bmod m=2&n \bmod m==3\\
+    \hline 
+    1 &\lfloor x \rfloor\\
+    2&2\left\lfloor\frac x2\right\rfloor+\frac n2&\lfloor x \rfloor+\frac n2-\frac12\\
+    3&3\left\lfloor\frac x3\right\rfloor+n &\lfloor x \rfloor+n -1&\lfloor x \rfloor+n -1\\4&4\left\lfloor\frac x4\right\rfloor+\frac{3n }2&\lfloor x \rfloor+\frac{3n }2-\frac32&2\left\lfloor\frac x2\right\rfloor+\frac{3n }2-1&\lfloor x \rfloor+\frac{3n }2-\frac32\end{array}
+    $$
+    It looks that: 
+    $$
+    \flr{\frac{x+kn\bmod m}{m}+\frac{kn}{m}-\frac{kn\bmod m}{m}}
+    $$
+}
+
+\only<5>{
+    This can be extracted from
+    $$
+    \flr{\frac{x+kn\bmod m}{m}}+\frac{kn}{m}-\frac{kn\bmod m}{m}
+    $$
+}
+
+\only<6> {
+    $$
+    \small
+    \begin{aligned}
+    & \left\lfloor\frac{x}{m}\right\rfloor&+\frac{0}{m}&-\frac{0 \bmod m}{m} \\
+    + & \left\lfloor\frac{x+n \bmod m}{m}\right\rfloor&+\frac{n}{m}&-\frac{n \bmod m}{m} \\
+    + & \left\lfloor\frac{x+2 n \bmod m}{m}\right\rfloor&+\frac{2 n}{m}&-\frac{2 n \bmod m}{m} \\
+    &\vdots & \vdots \\
+    + & \underbrace{\left\lfloor\frac{x+(m-1) n \bmod m}{m}\right\rfloor}_{a\left\lfloor\frac{x}{a}\right\rfloor}&+\underbrace{\frac{(m-1) n}{m}}_{b n}&-\underbrace{\frac{(m-1) n \bmod m}{m}}_C .
+    \end{aligned}
+    $$
+
+}
+
+\only<7>{
+    Looking at the table: 
+    \begin{itemize}
+        \item The second column is $\frac{1}{2}\left(0+\frac{(m-1) n}{m}\right) m$
+        \item The first column: See what $0 \bmod m, \quad n \bmod m, 2 n \bmod m, \cdots,(m-1) n \bmod m$ will get. 
+    \end{itemize}
+    
+}
+
+\only<8>{
+    Look at the first row of that one, recall 
+    $$
+    \small
+    n=\left\lfloor\frac{n}{m}\right\rfloor+\left\lfloor\frac{n+1}{m}\right\rfloor+\cdots+\left\lfloor\frac{n+(m-1)}{m}\right\rfloor
+    $$
+
+    \begin{itemize}
+        \item We will encounter the remainder from $1$ to $n$ one time(we will show at Chapt. 4)
+    \end{itemize}
+}
+
+\only<9> {
+    So we have: 
+    $$
+    \small
+    \begin{aligned}
+    & d\left(\left\lfloor\frac{x}{m}\right\rfloor+\left\lfloor\frac{x+d}{m}\right\rfloor+\cdots+\left\lfloor\frac{x+m-d}{m}\right\rfloor\right) \\
+    = & d\left(\left\lfloor\frac{x / d}{m / d}\right\rfloor+\left\lfloor\frac{x / d+1}{m / d}\right\rfloor+\cdots+\left\lfloor\frac{x / d+m / d-1}{m / d}\right\rfloor\right) \\
+    = & d\left\lfloor\frac{x}{d}\right\rfloor ., \text { and hence, } a=d=\operatorname{gcd}(m, n) .
+    \end{aligned}
+    $$
+}
+
+\only<10>{
+    The third column: $d\left(\frac{1}{2}\left(0+\frac{m-d}{m}\right) \cdot \frac{m}{d}\right)=\frac{m-d}{2}$
+
+    \begin{itemize}
+        \item $c=\frac{d-m}{2}$.
+    \end{itemize}
+
+    
+}
+
+\only<11> {
+    Putting altogether: 
+    $$\sum_{0 \leqslant k<m}\left\lfloor\frac{n k+x}{m}\right\rfloor=d\left\lfloor\frac{x}{d}\right\rfloor+\frac{m-1}{2} n+\frac{d-m}{2}.$$
+
+    where $d=\operatorname{gcd}(m, n)$.
+
+    
+}
+
+\only<12> {
+    In fact, $m$ and $n$ are symmetric: 
+    $$
+    \small
+\begin{aligned}
+\sum_{0 \leqslant k<m}\left\lfloor\frac{n k+x}{m}\right\rfloor & =d\left\lfloor\frac{x}{d}\right\rfloor+\frac{m-1}{2} n+\frac{d-m}{2} \\
+& =d\left\lfloor\frac{x}{d}\right\rfloor+\frac{(m-1)(n-1)}{2}+\frac{m-1}{2}+\frac{d-m}{2} \\
+& =d\left\lfloor\frac{x}{d}\right\rfloor+\frac{(m-1)(n-1)}{2}+\frac{d-1}{2}
+\end{aligned}
+$$
+
+saying, 
+
+$$
+\small
+\sum_{0 \leqslant k<m}\left\lfloor\frac{n k+x}{m}\right\rfloor=\sum_{0 \leqslant k<n}\left\lfloor\frac{m k+x}{n}\right\rfloor, \quad \text { integers } m, n>0 \text {. }
+$$
+}
+
+\end{frame}
+
