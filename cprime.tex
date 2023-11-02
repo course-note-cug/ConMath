@@ -1,0 +1,138 @@
+\section{Primes}
+\begin{frame}{Prime}
+    \begin{definition}
+         A positive integer $p$ is called prime if it has just two divisors, namely $1$ and $p$. We will also take $p$ to represent some prime in this chapter. 
+    \end{definition}
+
+    Example: 
+    $$
+    2,3,5,7,11,13,17,19,23,29,31,37,41, \ldots
+    $$
+    
+\end{frame}
+
+\begin{frame}{Prime Factorlization}
+
+\begin{theorem}
+    Any positive integer $n$ can be written as a product of primes. 
+    $${n}={p}_1 \ldots {p}_{{m}}=\prod_{k=1}^m {p}_{{k}}, \quad {p}_1 \leqslant \ldots \leqslant {p}_{{m}}$$
+\end{theorem}
+
+Proof idea. 
+
+\begin{itemize}
+    \item By Contradiction, assume ${n}={p}_1 \ldots {p}_{{m}}={q}_1 \ldots {q}_{{k}}, \quad {p}_1 \leqslant \cdots \leqslant {p}_{{m}} \quad \text { and } \quad {q}_1 \leqslant \cdots \leqslant {q}_{{k}}$
+    \item Prove $p_1=q_1$
+    \begin{itemize}
+        \item assume $p_1<q_1$, and they are primes, their gcd must be 1. 
+        \item Using Euclid's Algo, we get $a p_1+b q_1=1$
+        \item we will get $a \teal{p_1} q_2 \ldots q_k+b \teal{q_1 q_2 \ldots q_k}=q_2 \ldots q_k$.
+        \item \teal{teal} has factor of $q_1$
+        \item but ${q}_2 \ldots {q}_{{k}}<{n}$, contradiction, unless eq. 
+    \end{itemize}
+
+\end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Alternative means for GCD and LCM}
+
+$$
+n=\prod_p p^{n_p}, \quad \text { where each } n_p \geqslant 0
+$$
+\only<1>{
+\begin{itemize}
+    \item Unique!
+    \item linear combination!
+    \item just like coordinate system
+    \item infinite dimensions
+\end{itemize}
+
+We can formally describe like this: 
+\begin{itemize}
+    \item $\left\langle n_2, n_3, n_5, \ldots\right\rangle$
+    \item 12 = $\langle 2,1,0,0, \ldots\rangle$
+\end{itemize}
+}
+\only<2>{
+$$
+k=m n \quad \Longleftrightarrow \quad k_p=m_p+n_p \quad \text { for all } p .
+$$
+$$
+m \mid n \quad \Longleftrightarrow \quad m_p \leqslant n_p \text { for all } p
+$$
+$$
+\begin{aligned}
+& k=\operatorname{gcd}(m, n) \quad \Longleftrightarrow \quad k_p=\min \left(m_p, n_p\right) \quad \text { for all } p ; \\
+& k=\operatorname{lcm}(m, n) \quad \Longleftrightarrow \quad k_p=\max \left(m_p, n_p\right) \quad \text { for all } p .
+\end{aligned}
+$$
+}
+\end{frame}
+
+\begin{frame}{There Are Infinitely Many primes}
+
+\begin{quote}
+    "Oi $\pi \rho \tilde{\omega} \tau o \iota$ $\dot{\alpha} \rho \iota \theta \mu o \grave{~} \pi \lambda \epsilon i o v \varsigma$ $\epsilon i \sigma \grave{\imath} \pi \alpha \nu \tau \grave{\alpha} \varsigma \tau o \tilde{v}$ $\pi \lambda \dot{\eta} \theta o v \varsigma \pi \rho \dot{\omega} \tau \omega \nu$ $\dot{\alpha} \rho \iota \theta \mu \tilde{\omega} \nu . "$ --- Euler
+\end{quote}
+\begin{itemize}
+    \item Notice that $\gcd(m, m+1)=1$. 
+\end{itemize}
+
+List: 
+
+$$
+\begin{aligned}
+& e_1=1+1=2 ; \\
+& e_2=2+1=3 ; \\
+& e_3=2 \cdot 3+1=7 \\
+& e_4=2 \cdot 3 \cdot 7+1=43
+\end{aligned}
+$$
+    
+    
+\end{frame}
+
+\begin{frame}{Prime density}
+
+\begin{itemize}
+    \item the $n$th prime, $P_n$, is about $n$ times the natural $\log$ of $n$: $$P_n \sim n \ln n$$
+    \item the number of primes $\pi(x)$ not exceeding $x$ is $$\pi(x) \sim\frac{x}{\ln x}$$
+    
+\end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Factorial}
+    \begin{definition}[Factorial]
+        $$n !=1 \cdot 2 \cdot \ldots \cdot n=\prod_{k=1}^n k, \quad \text{integer } n \geqslant 0,$$ and we define that $0!=1$. 
+    \end{definition}
+
+    Some fun properties: 
+    \begin{itemize}
+        \item the number of digits in $n!$ exceeds $n$ when $n\geq  25$
+        \item $1\times 10^9$ at around 10. 
+    \end{itemize}
+    
+    How fast is factorial growing? 
+    \begin{itemize}
+        \item Take the idea of Gaussian's trick
+        \item we have $\small( n !)^2=\prod_{k=1}^n k(n+1-k),$
+        \item hence $$\small n \leqslant k(n+1-k) \leqslant \frac{1}{4}(n+1)^2$$
+
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Factorial: Example}
+
+\begin{example}
+    For any given prime $p$, the largest power of $p$ divides $n!$ . We denote this number by $\epsilon_p(n !)$. Pattern of $\epsilon_p(n !)$?
+\end{example}
+
+\begin{itemize}
+    \item Observation on $p=2, n=10$:
+\end{itemize}
+
+
+    
+\end{frame}
