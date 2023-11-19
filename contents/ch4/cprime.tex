@@ -129,10 +129,27 @@ $$
     For any given prime $p$, the largest power of $p$ divides $n!$ . We denote this number by $\epsilon_p(n !)$. Pattern of $\epsilon_p(n !)$?
 \end{example}
 
-\begin{itemize}
+\only<1>{
+    \begin{itemize}
     \item Observation on $p=2, n=10$:
 \end{itemize}
 
+\begin{table}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline &1 &2 & 3&4 &5 &6 &7&8 &9 &10 & powers of 2 \\
+        \hline divisible by 2&&x&&x&&x&&x&&x &$5=\lfloor 10 / 2\rfloor$ \\
+        \hline divisible by 4 &&&&x&&&&x&&& $2=\lfloor 10 / 4\rfloor$ \\
+        \hline divisible by 8 & & & & & & & &x&&&$1=\lfloor 10 / 8\rfloor$ \\
+        \hline powers of 2 & 0&1&0&2&0&1&0&3&0&1&8 \\
+        \hline
+        \end{tabular}
+\end{table}
+}
 
+\only<2>{
     
+}
+
+
 \end{frame}
+
